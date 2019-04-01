@@ -1,0 +1,22 @@
+{
+  "name": "simple-swap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "btoa": "^1.2.1",
+    "dotenv": "^7.0.0",
+    "ejs": "^2.6.1",
+    "eventsource": "^1.0.7",
+    "express": "^4.16.4",
+    "node-fetch": "^2.3.0",
+    "qrcode-generator": "^1.4.3",
+    "slp-sdk": "^3.2.4"
+  }
+}

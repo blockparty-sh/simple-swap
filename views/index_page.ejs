@@ -1,0 +1,75 @@
+<!doctype html>
+<html data-token_id="<%= token_id %>" data-cash_funding_address="<%= cash_funding_address %>">
+  <head>
+	<link rel="stylesheet" href="app.css">
+  </head>
+  <body>
+    <h1 class="header" id="title">Simple Swap</h1>
+
+	<div class="container">
+	  <h2 class="header">Token Details</h2>
+      <table id="token-details-table">
+        <tbody>
+          <tr>
+            <th scope="row">Token Id</th>
+            <td id="token_id"><a href="#">loading...</a></td>
+          </tr>
+          <tr>
+            <th scope="row">Name</th>
+            <td id="token_name">[none]</td>
+          </tr>
+          <tr>
+            <th scope="row">Symbol</th>
+            <td id="token_symbol">[none]</td>
+          </tr>
+          <tr>
+            <th scope="row">Timestamp</th>
+            <td id="token_timestamp"></td>
+          </tr>
+          <tr>
+            <th scope="row">Quantity</th>
+            <td id="token_quantity"></td>
+          </tr>
+          <tr>
+            <th scope="row">Decimals</th>
+            <td id="token_decimals">0</td>
+          </tr>
+          <tr>
+            <th scope="row">Document URI</th>
+            <td id="token_document_uri">
+              <a href="#">[none]</a>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Document Checksum</th>
+            <td id="token_document_checksum"></td>
+          </tr>
+        </tbody>
+      </table>
+	  <hr>
+      <div id="exchange_rate"><%= send_rate %> satoshis per token (<%= (send_rate / 100000000) %> BCH)</div>
+	  <div id="qrcode"><%- qr %></div>
+      <div id="cash_funding_address">
+		<a href="<%= cash_funding_address %>"><%= cash_funding_address %></a>
+	  </div>
+	  <hr>
+	  <h2 class="header">Swap History</h2>
+      <table id="swap-history-table">
+        <thead>
+          <tr>
+			<th>Time</th>
+			<th>Type</th>
+            <th>Txid</th>
+            <th>Amount</th>
+            <th>Address</th>
+          </tr>
+		</thead>
+        <tbody>
+        </tbody>
+      </table>
+	</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script src="https://unpkg.com/slpjs"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

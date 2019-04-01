@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+
+body {
+   background: url(https://www.toptal.com/designers/subtlepatterns/patterns/bananas.png);
+   font-family: 'Raleway', sans-serif;
+}
+
+a {
+    color: #48b3f2;
+    text-decoration:none;
+}
+
+a:hover {
+    color: #4b93ec;
+}
+
+hr {
+    margin: 3rem;
+}
+
+.header {
+    text-align: center;
+    background-color: #b9b9b9;
+    width: fit-content;
+    margin: 1rem auto;
+    color: #fff;
+    padding: 1rem 5rem;
+}
+
+#title {
+    background-color: #333;
+    padding: 1.9rem 2.9rem;
+}
+
+.container {
+    background-color:#fff;
+    margin:0px auto;
+    margin-top:3rem;
+    padding:2rem;
+    padding-top:1rem;
+    border-radius:0.25rem;
+    width:fit-content;
+}
+
+#qrcode img {
+    width: 100%;
+    height:100%;
+    image-rendering: pixelated;
+}
+
+#cash_funding_address {
+    margin: 0px auto;
+    width: fit-content;
+    font-size: 2rem;
+}
+
+#exchange_rate {
+  font-size: 2rem;
+  text-align: center;
+}
