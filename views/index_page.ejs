@@ -1,18 +1,27 @@
 <!doctype html>
 <html data-token_id="<%= token_id %>" data-cash_funding_address="<%= cash_funding_address %>">
   <head>
+    <title>Simple Swap | Alpha</title>
 	<link rel="stylesheet" href="app.css">
   </head>
   <body>
-    <h1 class="header" id="title">Simple Swap</h1>
+    <h1 class="header" id="title">Simple Swap | Alpha</h1>
 
 	<div class="container">
+      <p id="intro">
+      Simple Swap is a new way to swap <a href="https://bitcoincash.org">BCH</a> for <a href="https://slp.cash">SLP</a> tokens. All you need to do is send some BCH to the address below, and Simple Swap will send you a corresponding amount of tokens back to your address. Make sure you are using an SLP aware wallet such as <a href="https://www.electroncash.org/#slp">Electron Cash SLP</a> or <a href="https://badger.bitcoin.com/">Badger</a> otherwise you will lose your tokens.
+      <br>
+      <br>
+      Please keep in mind that this is alpha quality software for testing purposes only. No warranty is implied. If your tokens do not arrive please email the creator of this Simple Swap at <a href="mailto:<%= contact_email %>"><%= contact_email %></a> and include your TXID. If you have any suggestions or would like to view the code please visit the <a href="https://github.com/blockparty-sh/simple-swap">GitHub</a> repository. 
+      </p>
+      <hr>
+      <br>
 	  <h2 class="header">Token Details</h2>
       <table id="token-details-table">
         <tbody>
           <tr>
             <th scope="row">Token Id</th>
-            <td id="token_id"><a href="#">loading...</a></td>
+            <td id="token_id" class="mono"><a href="#">loading...</a></td>
           </tr>
           <tr>
             <th scope="row">Name</th>
@@ -42,11 +51,12 @@
           </tr>
           <tr>
             <th scope="row">Document Checksum</th>
-            <td id="token_document_checksum"></td>
+            <td id="token_document_checksum">[none]</td>
           </tr>
         </tbody>
       </table>
 	  <hr>
+      <div id="send-bch-here">Send BCH Here</div>
       <div id="exchange_rate"><%= send_rate %> satoshis per token (<%= (send_rate / 100000000) %> BCH)</div>
 	  <div id="qrcode"><%- qr %></div>
       <div id="cash_funding_address">
@@ -57,8 +67,8 @@
       <table id="swap-history-table">
         <thead>
           <tr>
-			<th>Time</th>
 			<th>Type</th>
+			<th>Time</th>
             <th>Txid</th>
             <th>Amount</th>
             <th>Address</th>

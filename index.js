@@ -151,8 +151,9 @@ web.get('/', (req, res) => {
   res.render('index_page', {
     'cash_funding_address': process.env.cash_funding_address,
     'token_id':             process.env.token_id,
+    'send_rate':            process.env.send_rate,
+    'contact_email':        process.env.contact_email,
     'qr':                   qr.createImgTag(),
-    'send_rate':            process.env.send_rate
   });
 })
 

@@ -1,5 +1,7 @@
 let app = {};
 
+app.compress_txid = (txid) => `${txid.substring(0, 12)}...${txid.substring(59)}`
+
 app.query = (url, query) => new Promise((resolve, reject) => {
   if (! url || ! query) {
     return resolve(false);
@@ -83,15 +85,15 @@ app.query_slpdb(app.query_get_token_details($('html').data('token_id')))
     .attr('href', 'https://simpleledger.info/#token/' + token.tokenDetails.tokenIdHex)
     .text(token.tokenDetails.tokenIdHex);
 
-  $('#token_name').text(token.tokenDetails.name);
-  $('#token_symbol').text(token.tokenDetails.symbol);
+  $('#token_name').text(token.tokenDetails.name || '[none]');
+  $('#token_symbol').text(token.tokenDetails.symbol || '[none]');
   $('#token_timestamp').text(token.tokenDetails.timestamp);
-  $('#token_quantity').text(token.tokenDetails.genesisOrMintQuantity);
+  $('#token_quantity').text(Number(token.tokenDetails.genesisOrMintQuantity).toLocaleString());
   $('#token_decimals').text(token.tokenDetails.decimals);
   $('#token_document_uri a')
       .attr('href', token.tokenDetails.documentUri)
-      .text(token.tokenDetails.documentUri);
-  $('#token_document_checksum').text(token.tokenDetails.documentSha256Hex);
+      .text(token.tokenDetails.documentUri || '[none]');
+  $('#token_document_checksum').text(token.tokenDetails.documentSha256Hex || '[none]');
 });
 
 
@@ -110,6 +112,7 @@ app.query_bitdb(app.query_get_bitdb_swap_history($('html').data('cash_funding_ad
 
     for (let o of bitdb_history) {
       o.type = 'BCH';
+      o.address = 'bitcoincash:' + o.address;
       history.push(o);
     }
     for (let o of slpdb_history) {
@@ -119,13 +122,19 @@ app.query_bitdb(app.query_get_bitdb_swap_history($('html').data('cash_funding_ad
 
     history = history.sort((a, b) => b.timestamp - a.timestamp);
     for (let o of history) {
+      const txid_url = o.type === 'BCH' ? 'https://explorer.bitcoin.com/bch/tx/'+o.txid
+                     : o.type === 'SLP' ? 'https://simpleledger.info/#tx/'+o.txid
+                     : '';
+      const addr_url = o.type === 'BCH' ? 'https://explorer.bitcoin.com/bch/address/'+o.address
+                     : o.type === 'SLP' ? 'https://simpleledger.info/#address/'+o.address
+                     : '';
       $('#swap-history-table tbody').append(`
         <tr>
-          <td>${(new Date(o.timestamp * 1000)).toLocaleString()}</td>
-          <td>${o.type}</td>
-          <td><a href="https://simpleledger.info/#tx/${o.txid}">${o.txid}</a></td>
-          <td>${o.amount}</td>
-          <td><a href="https://simpleledger.info/#address/${o.address}">${o.address}</a></td>
+          <td class="mono">${o.type}</td>
+          <td class="mono">${(new Date(o.timestamp * 1000)).toLocaleString()}</td>
+          <td class="mono"><a href="${txid_url}">${app.compress_txid(o.txid)}</a></td>
+          <td class="mono">${o.amount}</td>
+          <td class="mono"><a href="${addr_url}">${o.address}</a></td>
         </tr>
       `);
     }
